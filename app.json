@@ -1,0 +1,54 @@
+{
+    "id": "65d9b6c3-086b-41f7-b120-a91d1d5fa152",
+    "version": "0.0.1",
+    "requiredApiVersion": "^1.19.0",
+    "iconFile": "icon.png",
+    "author": {
+        "name": "NA",
+        "homepage": "NA",
+        "support": "NA"
+    },
+    "name": "BasicDemo",
+    "nameSlug": "basicdemo",
+    "classFile": "BasicDemoApp.ts",
+    "description": "Demo app",
+    "permissions": [
+        {
+            "name": "ui.registerButtons"
+        },
+        {
+            "name": "api"
+        },
+        {
+            "name": "slashcommand"
+        },
+        {
+            "name": "server-setting.read"
+        },
+        {
+            "name": "room.read"
+        },
+        {
+            "name": "persistence"
+        },
+        {
+            "name": "ui.interact"
+        },
+        {
+            "name": "networking"
+        },
+        {
+            "name": "message.write"
+        },
+        {
+            "name": "user.read"
+        },
+        {
+            "name": "room.write"
+        },
+        {
+            "name": "message.read"
+        }
+    ],
+    "implements": []
+}
