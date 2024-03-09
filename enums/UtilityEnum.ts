@@ -4,7 +4,7 @@ export enum UtilityEnum {
     INPUT_LABEL = "Send your message",
     INPUT_PLACEHOLDER = "Write your message",
     MESSAGE_INPUT_BLOCK_ID = "message-input-block-id",
-    MESSAGE_INPUT_ACTION_ID = "message-action-id",
+    MESSAGE_INPUT_ACTION_ID = "message-input-action-id",
     CANCEL = "Cancel",
     CLOSE_BLOCK_ID = "close-block-id",
     CLOSE_ACTION_ID = "close-action-id",

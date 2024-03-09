@@ -24,10 +24,10 @@ export function getInputBox(
                 text: placeholderText,
                 emoji: true,
             },
-            initialValue: intitialValue,
             appId,
             blockId,
             actionId,
+            initialValue: intitialValue,
             multiline: multiline
         },
     };

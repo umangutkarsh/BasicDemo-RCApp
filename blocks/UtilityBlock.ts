@@ -57,12 +57,11 @@ export async function buildHeaderBlock(
 }
 
 export async function messageHeaderBlock(
-    // username: string,
-    // appId: string,
+    message: string,
 ): Promise<Array<Block>> {
     const block: Block[] = [];
 
-    let markdownBlock: SectionBlock = getMarkdownBlock('This is a custom message');
+    let markdownBlock: SectionBlock = getMarkdownBlock(message);
     block.push(markdownBlock);
     return block;
 

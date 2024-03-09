@@ -45,31 +45,33 @@ export class ExecuteViewSubmitHandler {
         // const roomStr = this.read.getEnvironmentReader().getSettings().getValueById('GENERAL');
         const roomStr = (this.context.getInteractionData().room) as IRoom;
 
-        this.app.getLogger().info('appSender: ', appSender);
-        this.app.getLogger().info('user: ', user);
+        // this.app.getLogger().info('appSender: ', appSender);
+        // this.app.getLogger().info('user: ', user);
         // this.app.getLogger().info('Modify: ', this.modify.getCreator());
-        this.app.getLogger().info('RoomStr: ', roomStr);
+        // this.app.getLogger().info('RoomStr: ', roomStr);
 
         const messageId = (this.context.getInteractionData().view.submit?.value) as string;
-        this.app.getLogger().info('MessageId: ', messageId);
+        // this.app.getLogger().info('')
+        // this.app.getLogger().info('MessageId: ', messageId);
         let room;
         if (messageId) {
             room = await this.read.getMessageReader().getRoom(messageId);
             // room = (await this.read.getRoomReader().getById("GENERAL")) as IRoom;
         }
-        this.app.getLogger().info('Room: ', room);
+        // this.app.getLogger().info('Room: ', room);
 
 
         // if (!roomStr) {
         //     return this.context.getInteractionResponder().errorResponse();
         // }
+        // this.app.getLogger().info('MYS: ', view.state?.[UtilityEnum.MESSAGE_INPUT_BLOCK_ID]?.[UtilityEnum.MESSAGE_INPUT_ACTION_ID])
 
         try {
             switch(view.id) {
                 case UtilityEnum.MESSAGE_MODAL_ID:
                     // await sendMessage(this.modify, room, user, 'Custom Message');
                     const message = await this.modify.getUpdater().message(messageId, appSender);
-                    const msgHeaderBlock = await messageHeaderBlock();
+                    const msgHeaderBlock = await messageHeaderBlock(view.state?.[UtilityEnum.MESSAGE_INPUT_BLOCK_ID]?.[UtilityEnum.MESSAGE_INPUT_ACTION_ID]);
                     message.setEditor(user).setRoom(room);
                     message.setBlocks(msgHeaderBlock);
                     await this.modify.getUpdater().finish(message);
