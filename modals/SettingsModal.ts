@@ -54,7 +54,7 @@ export async function SettingsModal(
     );
 
     const value = {
-        id: UtilityEnum.MESSAGE_MODAL_ID,
+        id: UtilityEnum.SETTINGS_MODAL_ID,
         type: UIKitSurfaceType.CONTEXTUAL_BAR,
         appId: appId,
         title: {

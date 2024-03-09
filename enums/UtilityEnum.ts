@@ -21,4 +21,5 @@ export enum UtilityEnum {
     PUBLIC = "Public",
     PRIVATE = "Private",
     SETTINGS_BUTTON_ACTION_ID = "settings-button-action-id",
+    SETTINGS_MODAL_ID = "settings-modal-id",
 }

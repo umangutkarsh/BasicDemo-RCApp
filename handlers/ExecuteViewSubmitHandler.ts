@@ -54,15 +54,15 @@ export class ExecuteViewSubmitHandler {
         this.app.getLogger().info('MessageId: ', messageId);
         let room;
         if (messageId) {
-            // room = await this.read.getMessageReader().getRoom(messageId)
-            room = (await this.read.getRoomReader().getById("GENERAL")) as IRoom;
+            room = await this.read.getMessageReader().getRoom(messageId);
+            // room = (await this.read.getRoomReader().getById("GENERAL")) as IRoom;
         }
         this.app.getLogger().info('Room: ', room);
 
 
-        if (!roomStr) {
-            return this.context.getInteractionResponder().errorResponse();
-        }
+        // if (!roomStr) {
+        //     return this.context.getInteractionResponder().errorResponse();
+        // }
 
         try {
             switch(view.id) {
@@ -70,6 +70,7 @@ export class ExecuteViewSubmitHandler {
                     // await sendMessage(this.modify, room, user, 'Custom Message');
                     const message = await this.modify.getUpdater().message(messageId, appSender);
                     const msgHeaderBlock = await messageHeaderBlock();
+                    message.setEditor(user).setRoom(room);
                     message.setBlocks(msgHeaderBlock);
                     await this.modify.getUpdater().finish(message);
                     return this.context.getInteractionResponder().successResponse();
