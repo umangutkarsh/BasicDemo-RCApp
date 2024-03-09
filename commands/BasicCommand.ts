@@ -5,6 +5,7 @@ import { sendNotification } from '../lib/sendNotification';
 import { sendMessage } from '../lib/sendMessage';
 import { sendDirectMessage } from '../lib/sendDirectMessage';
 import { getMessageButton } from '../lib/getMessageButton';
+import { IUser } from '@rocket.chat/apps-engine/definition/users';
 
 export class BasicCommand implements ISlashCommand {
     public command = "basic-demo";
@@ -23,12 +24,17 @@ export class BasicCommand implements ISlashCommand {
         const [subCommands] = context.getArguments();
         const room = context.getRoom();
         const sender = context.getSender();
+        const appUser = (await read.getUserReader().getAppUser()) as IUser;
+
 
         // if (!Array.isArray(command)) {
         //     return;
         // }
 
         this.app.getLogger().info(`Slash command ${this.command} initiated. Trigger id: ${context.getTriggerId()}, with arguments ${context.getArguments()}`)
+        // this.app.getLogger().info(`Modify: `, modify);
+        this.app.getLogger().info(`Room: `, room);
+        this.app.getLogger().info(`Sender: `, sender);
 
         read.getUserReader();
         const display_message =  `*Basic App Commands*
@@ -45,21 +51,21 @@ export class BasicCommand implements ISlashCommand {
                 case "m":
                 case "msg":
                 case "message":
-                    message = `I have sent you a message. \nEveryone in this channel can read this\n`;
-                    await sendMessage(modify, room, sender, message);
+                    message = `*This is a message.* \nEveryone in this channel can read this\n`;
+                    await sendMessage(modify, room, appUser, message);
                     break;
 
                 case "n":
                 case "notify":
                 case "notification":
-                    message = `I have sent this notification.\nIf you reload, I'll be gone. This is different than a message`;
+                    message = `*This is a notification.*\nIf you reload, It'll be gone. This is different than a message`;
                     await sendNotification(modify, room, sender, message);
                     break;
 
                 case "d":
                 case "direct":
                 case "direct-message":
-                    message = `I have sent this direct message.\nOnly you can view this.`;
+                    message = `*This is a direct message.*\nOnly you can view this.`;
                     await sendDirectMessage(context, read, modify, message);
                     break;
 

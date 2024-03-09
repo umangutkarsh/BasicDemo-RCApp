@@ -32,7 +32,7 @@ export async function getMessageButton(
     const messageId = await sendMessage(
             modify,
             room,
-            sender,
+            appUser,
             `Message Button created by @${sender.username}`,
             headerBlock,
         );

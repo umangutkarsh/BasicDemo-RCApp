@@ -15,7 +15,7 @@ export async function buildHeaderBlock(
         UtilityEnum.PREVIEW_BLOCK_ID,
         UtilityEnum.MESSAGE_BUTTON_ACTION_ID,
         appId,
-        `${messageURL}`,
+        "Message",
         ButtonStyle.PRIMARY
     );
 
@@ -24,9 +24,18 @@ export async function buildHeaderBlock(
         UtilityEnum.PREVIEW_BLOCK_ID,
         UtilityEnum.DELETE_MESSAGE_ID,
         appId,
-        `${messageURL}`,
+        "Delete",
         ButtonStyle.DANGER,
     );
+
+    const settingsButton = getButton(
+        "Settings",
+        UtilityEnum.PREVIEW_BLOCK_ID,
+        UtilityEnum.SETTINGS_BUTTON_ACTION_ID,
+        appId,
+        "Settings",
+        ButtonStyle.PRIMARY,
+    )
 
     let markdownBlock: SectionBlock;
     // if (messageName == undefined) {
@@ -40,8 +49,21 @@ export async function buildHeaderBlock(
     const actionBlock = getActionsBlock(UtilityEnum.PREVIEW_BLOCK_ID, [
         messagebutton,
         deleteMessageButton,
+        settingsButton,
     ]);
     block.push(markdownBlock);
     block.push(actionBlock);
     return block;
+}
+
+export async function messageHeaderBlock(
+    // username: string,
+    // appId: string,
+): Promise<Array<Block>> {
+    const block: Block[] = [];
+
+    let markdownBlock: SectionBlock = getMarkdownBlock('This is a custom message');
+    block.push(markdownBlock);
+    return block;
+
 }

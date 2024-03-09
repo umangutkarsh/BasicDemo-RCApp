@@ -49,7 +49,7 @@ export async function MessageModal(
             text: UtilityEnum.MESSAGE_MODAL_TITLE,
         },
         close: closeButton,
-        send: sendButton,
+        submit: sendButton,
         blocks: block,
     };
     return value;

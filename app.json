@@ -12,6 +12,9 @@
     "nameSlug": "basicdemo",
     "classFile": "BasicDemoApp.ts",
     "description": "Demo app",
+    "implements": [
+        "IUIKitInteractionHandler"
+    ],
     "permissions": [
         {
             "name": "ui.registerButtons"
@@ -49,6 +52,5 @@
         {
             "name": "message.read"
         }
-    ],
-    "implements": []
+    ]
 }

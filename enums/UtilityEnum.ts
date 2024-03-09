@@ -18,4 +18,7 @@ export enum UtilityEnum {
     PREVIEW_BLOCK_ID = "preview-block-id",
     OPEN_BUTTON_ACTION_ID = "open-button-action-id",
     DELETE_MESSAGE_ID = "delete-message",
+    PUBLIC = "Public",
+    PRIVATE = "Private",
+    SETTINGS_BUTTON_ACTION_ID = "settings-button-action-id",
 }

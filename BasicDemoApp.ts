@@ -11,7 +11,7 @@ import {
 } from '@rocket.chat/apps-engine/definition/accessors';
 import { App } from '@rocket.chat/apps-engine/definition/App';
 import { IAppInfo } from '@rocket.chat/apps-engine/definition/metadata';
-import { IUIKitResponse, UIKitActionButtonInteractionContext, UIKitBlockInteractionContext, UIKitViewSubmitInteractionContext } from '@rocket.chat/apps-engine/definition/uikit';
+import { IUIKitInteractionHandler, IUIKitResponse, UIKitActionButtonInteractionContext, UIKitBlockInteractionContext, UIKitViewSubmitInteractionContext } from '@rocket.chat/apps-engine/definition/uikit';
 import { ExecuteActionButtonHandler } from './handlers/ExecuteActionButtonHandler';
 import { ExecuteViewSubmitHandler } from './handlers/ExecuteViewSubmitHandler';
 import { IRoom } from '@rocket.chat/apps-engine/definition/rooms';
@@ -23,8 +23,9 @@ import { BasicEndpoint } from './endpoints/BasicEndPoint';
 import { UtilityEnum } from './enums/UtilityEnum';
 import { UIActionButtonContext } from './enums/UIActionButtonContext';
 import { ExecuteBlockActionHandler } from './handlers/ExecuteBlockActionHandler';
+import { sendDirectMessage } from './lib/sendDirectMessage';
 
-export class BasicDemoApp extends App {
+export class BasicDemoApp extends App implements IUIKitInteractionHandler {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
         super(info, logger, accessors);
     }
@@ -32,21 +33,19 @@ export class BasicDemoApp extends App {
     public async executeBlockActionHandler(
         context: UIKitBlockInteractionContext,
         read: IRead,
-        modify: IModify,
         http: IHttp,
         persis: IPersistence,
-        room: IRoom,
+        modify: IModify,
     ): Promise<IUIKitResponse> {
-        if (typeof TextDecoder === 'undefined') {
-            global.TextDecoder = require('util').TextDecoder;
-        }
+        // if (typeof TextDecoder === 'undefined') {
+        //     global.TextDecoder = require('util').TextDecoder;
+        // }
         const handler = new ExecuteBlockActionHandler(
             this,
             read,
             modify,
             http,
             persis,
-            room,
             context,
         );
         return await handler.run();
@@ -76,16 +75,16 @@ export class BasicDemoApp extends App {
         read: IRead,
         http: IHttp,
         persistence: IPersistence,
-        modify: IModify
+        modify: IModify,
     ) {
-        return new ExecuteViewSubmitHandler().executor(
-            context,
+        return new ExecuteViewSubmitHandler(
+            this,
             read,
             http,
             persistence,
             modify,
-            this.getLogger()
-        );
+            context,
+        ).executor();
     }
 
     public async onInstall(
