@@ -1,17 +1,17 @@
 {
-    "id": "65d9b6c3-086b-41f7-b120-a91d1d5fa152",
+    "id": "6cf97816-ca2a-4fed-b429-e1abbd7d44c0",
     "version": "0.0.1",
     "requiredApiVersion": "^1.19.0",
     "iconFile": "icon.png",
     "author": {
-        "name": "NA",
+        "name": "Umang Utkarsh",
         "homepage": "NA",
         "support": "NA"
     },
-    "name": "BasicDemo",
-    "nameSlug": "basicdemo",
+    "name": "Basic-Demo",
+    "nameSlug": "basic-demo",
     "classFile": "BasicDemoApp.ts",
-    "description": "Demo app",
+    "description": "A demo RC app with basic functionalities",
     "implements": [
         "IUIKitInteractionHandler"
     ],

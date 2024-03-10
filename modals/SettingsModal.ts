@@ -32,6 +32,68 @@ export async function SettingsModal(
     );
     block.push(boardInputBlock);
 
+    let options: Array<Option> = [
+        {
+            text: {
+                type: "plain_text",
+                text: "Message",
+            },
+            value: UtilityEnum.MESSAGE,
+        },
+        {
+            text: {
+                type: "plain_text",
+                text: "Direct",
+            },
+            value: UtilityEnum.DIRECT,
+        },
+        {
+            text: {
+                type: "plain_text",
+                text: "Notification",
+            },
+            value: UtilityEnum.NOTIFY,
+        },
+    ];
+
+    let StaticSelectElement = getStaticSelectElement(
+        UtilityEnum.MESSAGE_SELECT_LABEL,
+        options,
+        appId,
+        UtilityEnum.MESSAGE_SELECT_BLOCK_ID,
+        UtilityEnum.MESSAGE_SELECT_ACTION_ID,
+    );
+
+    let inputChoiceBlock: InputBlock = {
+        type: "input",
+        label: {
+            type: "plain_text",
+            text: UtilityEnum.MESSAGE_TYPE_LABEL,
+        },
+        element: StaticSelectElement,
+    };
+    block.push(inputChoiceBlock);
+
+
+    // let MultiStaticSelectElement = getMultiStaticSelectElement(
+    //     UtilityEnum.MESSAGE_SELECT_LABEL,
+    //     options,
+    //     appId,
+    //     UtilityEnum.MESSAGE_MULTI_SELECT_BLOCK_ID,
+    //     UtilityEnum.MESSAGE_MULTI_SELECT_ACTION_ID,
+    // );
+
+    // let MultiChoiceBlock: InputBlock = {
+    //     type: "input",
+    //     label: {
+    //         type: "plain_text",
+    //         text: UtilityEnum.MESSAGE_TYPE_LABEL,
+    //     },
+    //     element: MultiStaticSelectElement,
+    // };
+    // block.push(MultiChoiceBlock);
+
+
     let closeButton = getButton(
         UtilityEnum.CANCEL,
         UtilityEnum.CLOSE_BLOCK_ID,

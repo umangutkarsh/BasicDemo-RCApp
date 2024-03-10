@@ -58,7 +58,7 @@ export class ExecuteBlockActionHandler {
         switch(actionId) {
             case UtilityEnum.MESSAGE_BUTTON_ACTION_ID:
                 if (messageId) {
-                    const modal = await MessageModal(appId, messageId);
+                    const modal = await MessageModal(this.app, appId, messageId);
                     await Promise.all([
                         this.modify.getUiController().openSurfaceView(
                             modal,

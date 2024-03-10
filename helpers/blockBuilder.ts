@@ -1,5 +1,5 @@
 import { ButtonStyle } from '@rocket.chat/apps-engine/definition/uikit';
-import { ActionsBlock, ButtonElement, ContextBlock, DividerBlock, InputBlock, LayoutBlockType, Option, PreviewBlockWithPreview, SectionBlock, StaticSelectElement } from '@rocket.chat/ui-kit';
+import { ActionsBlock, ButtonElement, ContextBlock, DividerBlock, InputBlock, LayoutBlockType, MultiStaticSelectElement, Option, PreviewBlockWithPreview, SectionBlock, StaticSelectElement } from '@rocket.chat/ui-kit';
 
 export function getInputBox(
     labelText: string,
@@ -141,10 +141,33 @@ export function getStaticSelectElement(
         appId,
         blockId,
         actionId,
-        initialValue: initialValue,
+        initialValue,
     };
     return block;
 }
+
+// export function getMultiStaticSelectElement(
+//     placeholderText: string,
+//     options: Array<Option>,
+//     appId: string,
+//     blockId: string,
+//     actionId: string,
+//     initialValue?: Option["value"][],
+// ) {
+//     const block: MultiStaticSelectElement = {
+//         type: "multi_static_select",
+//         placeholder: {
+//             type: "plain_text",
+//             text: placeholderText,
+//         },
+//         options,
+//         appId,
+//         blockId,
+//         actionId,
+//         initialValue,
+//     };
+//     return block;
+// }
 
 export function getOptions(
     text: string,

@@ -22,4 +22,13 @@ export enum UtilityEnum {
     PRIVATE = "Private",
     SETTINGS_BUTTON_ACTION_ID = "settings-button-action-id",
     SETTINGS_MODAL_ID = "settings-modal-id",
+    MESSAGE_SELECT_LABEL = "Select type of message",
+    MESSAGE = "MESSAGE",
+    DIRECT = "DIRECT",
+    NOTIFY = "NOTIFY",
+    MESSAGE_SELECT_BLOCK_ID = "message-select-block-id",
+    MESSAGE_SELECT_ACTION_ID = "message-select-action-id",
+    MESSAGE_TYPE_LABEL = "Message Type",
+    MESSAGE_MULTI_SELECT_BLOCK_ID = "message-multi-select-block-id",
+    MESSAGE_MULTI_SELECT_ACTION_ID = "message-multi-select-action-id",
 }

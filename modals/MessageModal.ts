@@ -3,8 +3,10 @@ import { Block } from '@rocket.chat/ui-kit';
 import { getButton, getInputBox, getSectionBlock } from '../helpers/blockBuilder';
 import { UtilityEnum } from '../enums/UtilityEnum';
 import { ButtonStyle, UIKitSurfaceType } from '@rocket.chat/apps-engine/definition/uikit';
+import { BasicDemoApp } from '../BasicDemoApp';
 
 export async function MessageModal(
+    app: BasicDemoApp,
     appId: string,
     messageId: string,
 ): Promise<IUIKitSurfaceViewParam> {

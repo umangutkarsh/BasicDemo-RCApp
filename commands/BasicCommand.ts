@@ -55,6 +55,10 @@ export class BasicCommand implements ISlashCommand {
                     await sendMessage(modify, room, appUser, message);
                     break;
 
+                // case "modal":
+                //     this.app.getID()
+
+
                 case "n":
                 case "notify":
                 case "notification":
