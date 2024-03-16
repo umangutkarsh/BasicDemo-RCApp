@@ -7,9 +7,12 @@ import { UtilityEnum } from "../enums/UtilityEnum";
 import { Block, Option, InputBlock } from "@rocket.chat/ui-kit";
 import {
     getButton,
+    getChannelSelectElement,
     getInputBox,
+    getMultiStaticSelectElement,
     getSectionBlock,
     getStaticSelectElement,
+    getToggleSwitch,
 } from "../helpers/blockBuilder";
 
 export async function SettingsModal(
@@ -56,6 +59,23 @@ export async function SettingsModal(
         },
     ];
 
+    let options2: Array<Option> = [
+        {
+            text: {
+                type: "plain_text",
+                text: "Message",
+            },
+            value: UtilityEnum.MESSAGE,
+        },
+        {
+            text: {
+                type: "plain_text",
+                text: "Direct",
+            },
+            value: UtilityEnum.DIRECT,
+        },
+    ];
+
     let StaticSelectElement = getStaticSelectElement(
         UtilityEnum.MESSAGE_SELECT_LABEL,
         options,
@@ -75,24 +95,56 @@ export async function SettingsModal(
     block.push(inputChoiceBlock);
 
 
-    // let MultiStaticSelectElement = getMultiStaticSelectElement(
-    //     UtilityEnum.MESSAGE_SELECT_LABEL,
-    //     options,
+    let MultiStaticSelectElement = getMultiStaticSelectElement(
+        UtilityEnum.MESSAGE_SELECT_LABEL,
+        options,
+        appId,
+        UtilityEnum.MESSAGE_MULTI_SELECT_BLOCK_ID,
+        UtilityEnum.MESSAGE_MULTI_SELECT_ACTION_ID,
+    );
+
+    let MultiChoiceBlock: InputBlock = {
+        type: "input",
+        label: {
+            type: "plain_text",
+            text: UtilityEnum.MESSAGE_TYPE_LABEL,
+        },
+        element: MultiStaticSelectElement,
+    };
+    block.push(MultiChoiceBlock);
+
+    let ChannelsSelectElement = getChannelSelectElement(
+        appId,
+        UtilityEnum.CHANNEL_SELECT_BLOCK_ID,
+        UtilityEnum.CHANNEL_SELECT_ACTION_ID,
+    );
+
+    let ChannelSelectBlock: InputBlock = {
+        type: "input",
+        label: {
+            type: "plain_text",
+            text: UtilityEnum.CHANNEL_SELECT_LABEL,
+        },
+        element: ChannelsSelectElement,
+    }
+    block.push(ChannelSelectBlock);
+
+    // let ToggleSwitchElement = getToggleSwitch(
+    //     options2,
     //     appId,
-    //     UtilityEnum.MESSAGE_MULTI_SELECT_BLOCK_ID,
-    //     UtilityEnum.MESSAGE_MULTI_SELECT_ACTION_ID,
+    //     UtilityEnum.CHANNEL_SELECT_BLOCK_ID,
+    //     UtilityEnum.CHANNEL_SELECT_ACTION_ID,
     // );
 
-    // let MultiChoiceBlock: InputBlock = {
+    // let ToggleSwitchBlock: InputBlock = {
     //     type: "input",
     //     label: {
     //         type: "plain_text",
-    //         text: UtilityEnum.MESSAGE_TYPE_LABEL,
+    //         text: UtilityEnum.CHANNEL_SELECT_LABEL,
     //     },
-    //     element: MultiStaticSelectElement,
+    //     element: ToggleSwitchElement,
     // };
-    // block.push(MultiChoiceBlock);
-
+    // block.push(ToggleSwitchBlock);
 
     let closeButton = getButton(
         UtilityEnum.CANCEL,

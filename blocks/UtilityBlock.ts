@@ -1,6 +1,6 @@
 import { Block, SectionBlock } from '@rocket.chat/ui-kit';
 import { UtilityEnum } from '../enums/UtilityEnum';
-import { getActionsBlock, getButton, getMarkdownBlock } from '../helpers/blockBuilder';
+import { getActionsBlock, getButton, getMarkdownBlock, getSecButton } from '../helpers/blockBuilder';
 import { ButtonStyle } from '@rocket.chat/apps-engine/definition/uikit';
 
 export async function buildHeaderBlock(
@@ -19,10 +19,28 @@ export async function buildHeaderBlock(
         ButtonStyle.PRIMARY
     );
 
+    const notifyButton = getSecButton(
+        "Notify",
+        UtilityEnum.PREVIEW_BLOCK_ID,
+        UtilityEnum.NOTIFY_BUTTON_ACTION_ID,
+        appId,
+        "Notify",
+        ButtonStyle.PRIMARY,
+    );
+
+    const directButton = getSecButton(
+        "Direct",
+        UtilityEnum.PREVIEW_BLOCK_ID,
+        UtilityEnum.DIRECT_BUTTON_ACTION_ID,
+        appId,
+        "Direct",
+        ButtonStyle.PRIMARY,
+    );
+
     const deleteMessageButton = getButton(
         "Delete",
         UtilityEnum.PREVIEW_BLOCK_ID,
-        UtilityEnum.DELETE_MESSAGE_ID,
+        UtilityEnum.DELETE_MESSAGE_ACTION_ID,
         appId,
         "Delete",
         ButtonStyle.DANGER,
@@ -48,6 +66,8 @@ export async function buildHeaderBlock(
 
     const actionBlock = getActionsBlock(UtilityEnum.PREVIEW_BLOCK_ID, [
         messagebutton,
+        notifyButton,
+        directButton,
         deleteMessageButton,
         settingsButton,
     ]);

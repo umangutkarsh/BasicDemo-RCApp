@@ -7,6 +7,7 @@ import { MessageModal } from '../modals/MessageModal';
 import { sendMessage } from '../lib/sendMessage';
 import { IRoom } from '@rocket.chat/apps-engine/definition/rooms';
 import { SettingsModal } from '../modals/SettingsModal';
+import { NotifyModal } from '../modals/NotifyModal';
 
 export class ExecuteBlockActionHandler {
    constructor(
@@ -40,6 +41,8 @@ export class ExecuteBlockActionHandler {
         const appId = data?.appId;
         const appSender: IUser = (await this.read.getUserReader().getAppUser()) as IUser;
         this.app.getLogger().info(actionId);
+        console.log('ACTIONId: ', actionId);
+
 
         // if (messageId) {
         //             // const modal = await MessageModal(appId, messageId);
@@ -69,6 +72,17 @@ export class ExecuteBlockActionHandler {
                         ),
                     ]);
                     // await sendMessage(this.modify, room, appSender, `I have sent a message`);
+                    return this.context.getInteractionResponder().successResponse();
+                }
+
+            case UtilityEnum.NOTIFY_BUTTON_ACTION_ID:
+                if (messageId) {
+                    const modal = await NotifyModal(this.app, appId,messageId);
+                    await Promise.all([
+                        this.modify.getUiController().openSurfaceView(
+                            modal, { triggerId }, user,
+                        ),
+                    ]);
                     return this.context.getInteractionResponder().successResponse();
                 }
 

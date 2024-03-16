@@ -1,5 +1,5 @@
 import { ButtonStyle } from '@rocket.chat/apps-engine/definition/uikit';
-import { ActionsBlock, ButtonElement, ContextBlock, DividerBlock, InputBlock, LayoutBlockType, MultiStaticSelectElement, Option, PreviewBlockWithPreview, SectionBlock, StaticSelectElement } from '@rocket.chat/ui-kit';
+import { ActionsBlock, ButtonElement, ContextBlock, DividerBlock, InputBlock, LayoutBlockType, MultiStaticSelectElement, Option, PreviewBlockWithPreview, SectionBlock, StaticSelectElement, ChannelsSelectElement, ToggleSwitchElement } from '@rocket.chat/ui-kit';
 
 export function getInputBox(
     labelText: string,
@@ -60,6 +60,34 @@ export function getButton(
     };
     return button;
 }
+
+export function getSecButton(
+    labelText: string,
+    blockId: string,
+    actionId: string,
+    appId: string,
+    value?: string,
+    style?: ButtonStyle.PRIMARY | ButtonStyle.DANGER,
+    url?: string,
+) {
+    const button: ButtonElement = {
+        type: "button",
+        text: {
+            type: "plain_text",
+            text: labelText,
+            emoji: true,
+        },
+        appId,
+        blockId,
+        actionId,
+        url,
+        value,
+        style,
+        secondary: true,
+    };
+    return button;
+}
+
 
 export function getEditBlock(
     blockId: string,
@@ -146,28 +174,28 @@ export function getStaticSelectElement(
     return block;
 }
 
-// export function getMultiStaticSelectElement(
-//     placeholderText: string,
-//     options: Array<Option>,
-//     appId: string,
-//     blockId: string,
-//     actionId: string,
-//     initialValue?: Option["value"][],
-// ) {
-//     const block: MultiStaticSelectElement = {
-//         type: "multi_static_select",
-//         placeholder: {
-//             type: "plain_text",
-//             text: placeholderText,
-//         },
-//         options,
-//         appId,
-//         blockId,
-//         actionId,
-//         initialValue,
-//     };
-//     return block;
-// }
+export function getMultiStaticSelectElement(
+    placeholderText: string,
+    options: Array<Option>,
+    appId: string,
+    blockId: string,
+    actionId: string,
+    initialValue?: Option["value"][],
+) {
+    const block: MultiStaticSelectElement = {
+        type: "multi_static_select",
+        placeholder: {
+            type: "plain_text",
+            text: placeholderText,
+        },
+        options,
+        appId,
+        blockId,
+        actionId,
+        initialValue,
+    };
+    return block;
+}
 
 export function getOptions(
     text: string,
@@ -195,34 +223,64 @@ export function getActionsBlock(
     return block;
 }
 
-export function getPreviewBlock(
-    url: string,
-    title: string,
-    boardURL: string,
-    dimensions: {
-        width: number,
-        height: number,
-    }
+// export function getPreviewBlock(
+//     url: string,
+//     title: string,
+//     boardURL: string,
+//     dimensions: {
+//         width: number,
+//         height: number,
+//     }
+// ) {
+//     const block: PreviewBlockWithPreview = {
+//         preview: {
+//             url: url,
+//             dimensions: {
+//                 width: dimensions?.width || 500,
+//                 height: dimensions?.height || 500,
+//             }
+//         },
+//         type: LayoutBlockType.PREVIEW,
+//         title: [
+//             {
+//                 type: "plain_text",
+//                 text: title,
+//             },
+//         ],
+//         description: [],
+//         externalUrl: boardURL,
+//         oembedUrl: boardURL,
+//         thumb: undefined,
+//     };
+//     return block;
+// }
+
+export function getChannelSelectElement(
+    appId: string,
+    blockId: string,
+    actionId: string,
 ) {
-    const block: PreviewBlockWithPreview = {
-        preview: {
-            url: url,
-            dimensions: {
-                width: dimensions?.width || 500,
-                height: dimensions?.height || 500,
-            }
-        },
-        type: LayoutBlockType.PREVIEW,
-        title: [
-            {
-                type: "plain_text",
-                text: title,
-            },
-        ],
-        description: [],
-        externalUrl: boardURL,
-        oembedUrl: boardURL,
-        thumb: undefined,
+    const block: ChannelsSelectElement = {
+        type: "channels_select",
+        appId,
+        blockId,
+        actionId,
+    };
+    return block;
+}
+
+export function getToggleSwitch(
+    options: Array<Option>,
+    appId: string,
+    blockId: string,
+    actionId: string,
+) {
+    const block: ToggleSwitchElement = {
+        type: "toggle_switch",
+        options,
+        appId,
+        blockId,
+        actionId,
     };
     return block;
 }
