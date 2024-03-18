@@ -5,6 +5,7 @@ import { IUser } from '@rocket.chat/apps-engine/definition/users';
 import { BasicDemoApp } from '../BasicDemoApp';
 import { randomId } from './utils';
 import { sendMessage } from './sendMessage';
+import { MessagePersistence } from '../persistence/MessagePersistence';
 
 export async function getMessageButton(
     app: BasicDemoApp,
@@ -36,6 +37,18 @@ export async function getMessageButton(
             `Message Button created by @${sender.username}`,
             headerBlock,
         );
+
+    let messageStorage = new MessagePersistence(persistence, read.getPersistenceReader());
+    const messageAdded = await messageStorage.persist(room, messageId);
+    if (messageAdded) {
+        console.log('Message Saved to Persistence storage');
+    }
+
+    let data = await messageStorage.findAll();
+    if (data) {
+        console.log('Data from storage: ', data);
+        app.getLogger().info('Data from storage: ', data);
+    }
 
     console.log('MesssageId: ', messageId);
 

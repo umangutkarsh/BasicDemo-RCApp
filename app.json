@@ -13,7 +13,8 @@
     "classFile": "BasicDemoApp.ts",
     "description": "A demo RC app with basic functionalities",
     "implements": [
-        "IUIKitInteractionHandler"
+        "IUIKitInteractionHandler",
+        "IPostMessageSent"
     ],
     "permissions": [
         {
