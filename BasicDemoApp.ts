@@ -77,17 +77,25 @@ export class BasicDemoApp extends App implements IUIKitInteractionHandler, IPost
         persistence: IPersistence,
         modify: IModify
     ): Promise<void> {
+        if (!message.id) {
+            console.error('Message ID is undefined.');
+            return; // Exit the function if message ID is undefined
+        }
+
         const room = message.room;
         const msg = message.text;
         // const messageId = modify.getCreator().startMessage().setSender()
         // const room = read.getRoomReader().getById(roomId);
-        let messageStorage = new MessagePersistence(persistence, this.getAccessors().reader.getPersistenceReader());
+        let messageStorage = new MessagePersistence(
+            persistence,
+            this.getAccessors().reader.getPersistenceReader()
+        );
         console.log('Messaage: ', message);
 
-        // const messageAdded = await messageStorage.persist(room, message.id);
-        // if (messageAdded) {
-        //     console.log('Message Saved to Persistence storage');
-        // }
+        const messageAdded = await messageStorage.persist(room, message.id);
+        if (messageAdded) {
+            console.log('Message Saved to Persistence storage');
+        }
 
         let data = await messageStorage.findAll();
         if (data) {

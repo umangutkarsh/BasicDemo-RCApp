@@ -8,6 +8,7 @@ import { sendMessage } from '../lib/sendMessage';
 import { IRoom } from '@rocket.chat/apps-engine/definition/rooms';
 import { SettingsModal } from '../modals/SettingsModal';
 import { NotifyModal } from '../modals/NotifyModal';
+import { GetMessageModal } from '../modals/GetMessageModal';
 
 export class ExecuteBlockActionHandler {
    constructor(
@@ -22,6 +23,8 @@ export class ExecuteBlockActionHandler {
    public async run(): Promise<IUIKitResponse> {
       const data = this.context.getInteractionData();
       const roomStr = this.context.getInteractionData().room;
+      console.log('RoomStr: ', roomStr);
+
       if (!roomStr) {
         return this.context.getInteractionResponder().errorResponse();
       }
@@ -96,6 +99,28 @@ export class ExecuteBlockActionHandler {
                                 triggerId,
                             },
                             user
+                        ),
+                    ]);
+                }
+                return this.context.getInteractionResponder().successResponse();
+
+            case UtilityEnum.GET_MESSAGES_BUTTON_ACTION_ID:
+                if (messageId) {
+                    const modal = await GetMessageModal(
+                        this.app,
+                        appId,
+                        messageId,
+                        this.read,
+                        roomStr,
+                        this.persistence
+                    );
+                    await Promise.all([
+                        this.modify.getUiController().openSurfaceView(
+                            modal,
+                            {
+                                triggerId,
+                            },
+                            user,
                         ),
                     ]);
                 }

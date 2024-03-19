@@ -28,14 +28,14 @@ export async function buildHeaderBlock(
         ButtonStyle.PRIMARY,
     );
 
-    const directButton = getSecButton(
-        "Direct",
-        UtilityEnum.PREVIEW_BLOCK_ID,
-        UtilityEnum.DIRECT_BUTTON_ACTION_ID,
-        appId,
-        "Direct",
-        ButtonStyle.PRIMARY,
-    );
+    // const directButton = getSecButton(
+    //     "Direct",
+    //     UtilityEnum.PREVIEW_BLOCK_ID,
+    //     UtilityEnum.DIRECT_BUTTON_ACTION_ID,
+    //     appId,
+    //     "Direct",
+    //     ButtonStyle.PRIMARY,
+    // );
 
     const deleteMessageButton = getButton(
         "Delete",
@@ -53,6 +53,15 @@ export async function buildHeaderBlock(
         appId,
         "Settings",
         ButtonStyle.PRIMARY,
+    );
+
+    const getMessagesButton = getButton(
+        "Get Messages",
+        UtilityEnum.PREVIEW_BLOCK_ID,
+        UtilityEnum.GET_MESSAGES_BUTTON_ACTION_ID,
+        appId,
+        "Get Messages",
+        ButtonStyle.PRIMARY,
     )
 
     let markdownBlock: SectionBlock;
@@ -67,9 +76,10 @@ export async function buildHeaderBlock(
     const actionBlock = getActionsBlock(UtilityEnum.PREVIEW_BLOCK_ID, [
         messagebutton,
         notifyButton,
-        directButton,
+        // directButton,
         deleteMessageButton,
         settingsButton,
+        getMessagesButton,
     ]);
     block.push(markdownBlock);
     block.push(actionBlock);
